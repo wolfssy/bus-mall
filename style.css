@@ -3,6 +3,27 @@ body {
   background-color: gray
 }
 
-img {
+#image-container{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+.one {
   width: 400px;
+  height:400px;
+  float: left;
+  display: fixed;
+}
+.two {
+  width: 400px;
+  height:400px;
+  float: center;
+  display:fixed;
+}
+.three {
+  width: 400px;
+  height:400px;
+  float: right;
+  display:absolute;
 }
