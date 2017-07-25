@@ -3,6 +3,8 @@ body {
   background-color: gray
 }
 
+
+
 #image-container{
   display: flex;
   justify-content: space-around;
@@ -12,18 +14,12 @@ body {
 .one {
   width: 400px;
   height:400px;
-  float: left;
-  display: fixed;
 }
 .two {
   width: 400px;
   height:400px;
-  float: center;
-  display:fixed;
 }
 .three {
   width: 400px;
   height:400px;
-  float: right;
-  display:absolute;
 }
