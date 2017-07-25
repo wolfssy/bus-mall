@@ -26,7 +26,10 @@ function image(name, source, timesClicked, timesShown){
   }
 
 
-document.getElementById('image-container').addEventListener('click', image)
+document.getElementById('image-container').addEventListener('click', randomImage)
+document.getElementById('one').addEventListener('click', randomImage)
+document.getElementById('two').addEventListener('click', randomImage)
+document.getElementById('three').addEventListener('click', randomImage)
 
 function randomImage(){
   var random1 = Math.floor(Math.random() * allImages[i]);
