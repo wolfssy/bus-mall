@@ -1,61 +1,91 @@
 'use strict';
-// var newImages = [];
-// var theOldImages = [];
-//
-// function image(name, source, timesClicked, timesShown){
-//   this.name = name;
-//   this.source = source;
-//   this.timesClicked = 0;
-//   this.timesShown = 0;
-//   var random = Math.floor(Math.random() * allImages[i]);
-//   newImages.push(this);
-// }
-//   this.render = function(){
-//     var trEl = document.creatElement('tr');
-//     var tdEl = document.createElement('td');
-//     tdEl.textcontent = this.nametrEl.appendChild(tdEl);
-//     while (var i = 0; i < allImages.length; i++){
-//       tdEl=document.createElemnt('td');
-//       tdEl.textContent = this.newImages[i];
-//       trEl.appendChild(tdEl);
-//       image-container.appendChild(trEl);
-//     };
-//     if(image() === this.render())
-//     theOldImages.push(this);
-//   }
-//
-//
-// document.getElementById('image-container').addEventListener('click', randomImage)
-// document.getElementById('one').addEventListener('click', randomImage)
-// document.getElementById('two').addEventListener('click', randomImage)
-// document.getElementById('three').addEventListener('click', randomImage)
-//
-// function randomImage(){
-//   var random1 = Math.floor(Math.random() * allImages[i]);
-//   var random2 = Math.floor(Math.random() * allImages[i]);
-//   while(random1 === random2){
-//     var random = Math.floor(Math.random() * allImages[i]);
-//   }
-//   var random3 = Math.floor(Math.random() * allImages[i]);
-//   while(random1 === random3 || random2 ===random3){
-//     alert(woops!);
-//     var random = Math.floor(Math.random() * allImages[i]);
-//   }
-// }
+// minute 38 in part 2 of 3
 function Pictures(number){
   this.name = number;
-  this.sourch = 'images/' + this.name + '.jpg';
+  this.source = 'img/' + this.name + '.jpg';
   this.amountOfShows = 0;
   this.timesClicked = 0;
   Pictures.all.push(this);
 }
-Pictures.all = [];
-Pictures.allNames = ['one.jpg', 'two.jpg', 'three.jpg', 'three.jpg', 'four.jpg', 'five.jpg', 'six.jpg', 'seven.jpg', 'eight.jpg', 'nine.jpg', 'ten.jpg', 'eleven.jpg', 'twelve.jpg', 'thirteen.jpg', 'fourteen.jpg', 'fifteen.jpg', 'sixteen.jpg', 'seventeen.jpg', 'eighteen.jpg', 'nineteen.jpg', 'twenty.jpg'];
 
+Pictures.totalClicks = 0;
+Pictures.all = [];
+Pictures.allNames = ['one', 'two', 'three', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen','nineteen','twenty'];
+var previouslyShown = [];
 for(var i = 0; i < Pictures.allNames.length; i++){
   new Pictures(Pictures.allNames[i]);
 }
-Pictures.leftImage = document.getElementById('left');
-Pictures.centerImage = document.getElementById('center');
-Pictures.rightImage = document.getElementById('right');
+Pictures.leftImg = document.getElementById('left');
+Pictures.centerImg = document.getElementById('center');
+Pictures.rightImg = document.getElementById('right');
 Pictures.container = document.getElementById('imageContainer');
+
+function makeRandomNumber(){
+  return Math.floor(Math.random() * Pictures.all.length);
+}
+
+
+
+function displayImages(){
+  //generate 3 random numbers
+  //ensure that those numbers are unique
+  console.log(previouslyShown, 'prevoiusly shown images');
+  var numbers = [];
+  numbers[0] = makeRandomNumber();
+  numbers[1] = makeRandomNumber();
+  while(numbers[0] === numbers[1]) {
+    console.log('Dupe found');
+    numbers[1] = makeRandomNumber();
+  }
+  numbers[2] = makeRandomNumber();
+  while(numbers[2] === numbers[1] || numbers[2] === numbers[0]){
+    console.log('Dupe found');
+    numbers[2] = makeRandomNumber();
+  }
+  Pictures.leftImg.src = Pictures.all[numbers[0]].source;
+  Pictures.centerImg.src = Pictures.all[numbers[1]].source;
+  Pictures.rightImg.src = Pictures.all[numbers[2]].source;
+  Pictures.leftImg.alt = Pictures.all[numbers[0]].name;
+  Pictures.centerImg.alt = Pictures.all[numbers[1]].name;
+  Pictures.rightImg.alt = Pictures.all[numbers[2]].name; Pictures.all[numbers[0]].amountOfShows += 1;
+  Pictures.all[numbers[1]].amountOfShows += 1;
+  Pictures.all[numbers[2]].amountOfShows += 1;
+  console.log(numbers, 'showing');
+  previouslyShown = numbers;
+}
+
+function showList(){
+  var ulEl = document.getElementById('thelist');
+  for(var i = 0; i < Pictures.all.length; i++){
+  //1. create an element
+    var liEl = document.createElement('li');
+  //2. give it content
+  liEl.textContent = Pictures.all[i].name + ' was shown ' + Pictures.all[i].amountOfShows + ' times and was clicked' + Pictures.all[i].timesClicked + 'times';
+  //3. append it to the DOM
+  ulEl.appendChild(liEl);
+  }
+}
+function handleClick(e){
+  Pictures.totalClicks += 1;
+  console.log(Pictures.totalClicks + ' total clicks');
+  for(var i = 0; i < Pictures.all.length; i++){
+    if(e.target.alt === Pictures.all[i].name){
+      //tally a Click
+      Pictures.all[i].timesClicked += 1;
+    }
+  }
+
+
+  if(Pictures.totalClicks === 25){
+    //removed the event listener
+    Pictures.container.removeEventListener('click', handleClick);
+    //display a list of products and shows/clicks
+    showList();
+  }
+
+  displayImages();
+}
+
+displayImages();
+
+Pictures.container.addEventListener('click', handleClick);

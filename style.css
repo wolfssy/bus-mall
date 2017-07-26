@@ -5,21 +5,21 @@ body {
 
 
 
-#image-container{
+#imageContainer{
   display: flex;
   justify-content: space-around;
   flex-direction: row;
 }
 
-.one {
-  width: 400px;
-  height:400px;
+#left {
+  width: 150px;
+  height:150px;
 }
-.two {
-  width: 400px;
-  height:400px;
+#center {
+  width: 150px;
+  height:150px;
 }
-.three {
-  width: 400px;
-  height:400px;
+#right {
+  width: 150px;
+  height:150px;
 }
