@@ -12,6 +12,7 @@ Pictures.totalClicks = 0;
 Pictures.all = [];
 Pictures.allNames = ['one', 'two', 'three', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen','nineteen','twenty'];
 var previouslyShown = [];
+
 for(var i = 0; i < Pictures.allNames.length; i++){
   new Pictures(Pictures.allNames[i]);
 }
@@ -42,6 +43,17 @@ function displayImages(){
     console.log('Dupe found');
     numbers[2] = makeRandomNumber();
   }
+  for(var i = 0; i < numbers.length; i++){
+    while(previouslyShown.includes(numbers[i])){
+      numbers[i] = makeRandomNumber();
+    }
+  }
+  for(var j = 0; j < numbers.length; j++){
+    while(Pictures.all.includes(numbers[j])){
+      numbers[i] = makeRandomNumber();
+    }
+  }
+
   Pictures.leftImg.src = Pictures.all[numbers[0]].source;
   Pictures.centerImg.src = Pictures.all[numbers[1]].source;
   Pictures.rightImg.src = Pictures.all[numbers[2]].source;
@@ -54,15 +66,16 @@ function displayImages(){
   previouslyShown = numbers;
 }
 
+
 function showList(){
   var ulEl = document.getElementById('thelist');
   for(var i = 0; i < Pictures.all.length; i++){
   //1. create an element
     var liEl = document.createElement('li');
   //2. give it content
-  liEl.textContent = Pictures.all[i].name + ' was shown ' + Pictures.all[i].amountOfShows + ' times and was clicked' + Pictures.all[i].timesClicked + 'times';
+    liEl.textContent = Pictures.all[i].name + ' was shown ' + Pictures.all[i].amountOfShows + ' times and was clicked' + Pictures.all[i].timesClicked + 'times';
   //3. append it to the DOM
-  ulEl.appendChild(liEl);
+    ulEl.appendChild(liEl);
   }
 }
 function handleClick(e){
