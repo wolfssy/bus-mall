@@ -73,7 +73,7 @@ function showList(){
   //1. create an element
     var liEl = document.createElement('li');
   //2. give it content
-    liEl.textContent = Pictures.all[i].name + ' was shown ' + Pictures.all[i].amountOfShows + ' times and was clicked' + Pictures.all[i].timesClicked + 'times';
+    liEl.textContent = Pictures.all[i].name + ' was shown ' + Pictures.all[i].amountOfShows + ' times and was clicked ' + Pictures.all[i].timesClicked + ' times';
   //3. append it to the DOM
     ulEl.appendChild(liEl);
   }
