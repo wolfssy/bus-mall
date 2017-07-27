@@ -102,3 +102,37 @@ function handleClick(e){
 displayImages();
 
 Pictures.container.addEventListener('click', handleClick);
+
+//+++++++++++++++++++++++++++++++++++
+// THE Chart
+//+++++++++++++++++++++++++++++++++++
+var votes = [];
+var titles = [];
+
+function updateChartArrays(){
+  for(var i = 0; i < Pictures.all.length; i++){
+    titles[i] = Pictures.all[i].title;
+    votes[i] = Pictures.all[i].votes;
+  }
+}
+function showProducts(){
+  var productList = document.getElementById('thelist');
+  productList.innerHTML = '';
+  productList.hidden = false;
+  productList.textContent = 'Click to hide';
+  for(var i = o; i < Pictures.all.length; i++){
+    var liEl = document.createElement('li');
+    liEl.textContent = Pictures.all[i].title + ', ' + Pictures.all[i].votes + ' votes';
+    productList.appendChild(liEl);
+  };
+};
+function tallyVote(thisPictures){
+  for(var i = 0; i < Pictures.all.length; i++){
+    if (thisPictures.all === Pictures.all[i].identifier){
+      Pictures.all[i].votes++;
+      updateChartArrays();
+    }
+  }
+}
+//++++++++++++++++++++++++++++++++++++++++++++++++
+//32 minutes
