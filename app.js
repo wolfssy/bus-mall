@@ -1,5 +1,5 @@
 'use strict';
-// minute 38 in part 2 of 3
+
 function Pictures(number){
   this.name = number;
   this.source = 'img/' + this.name + '.jpg';
@@ -10,7 +10,7 @@ function Pictures(number){
 
 Pictures.totalClicks = 0;
 Pictures.all = [];
-Pictures.allNames = ['one', 'two', 'three', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen','nineteen','twenty'];
+Pictures.allNames = ['R2D2', 'Banana-Slicer', 'Tablet-Stand', 'Yellow-Boots', 'Mini-Kitchen', 'Meatball-Gum', 'Chair', 'Cthulhu', 'Dragon-Meat', 'Aflak-Pup', 'Pen', 'Pet-Sweep', 'Pizza-Scissors', 'Shark-Bed', 'Baby-Sweep', 'StarWars', 'Unicorn-Meat', 'Tail-Usb','Water','Wine-Glass'];
 var previouslyShown = [];
 
 for(var i = 0; i < Pictures.allNames.length; i++){
@@ -134,5 +134,3 @@ function tallyVote(thisPictures){
     }
   }
 }
-//++++++++++++++++++++++++++++++++++++++++++++++++
-//32 minutes
